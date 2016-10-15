@@ -50,6 +50,30 @@ function drawKey() {
 		.text("Married Family Homeowners");
 }
 
+//use the Json to make calculations on the data
+function parseCensusJson(census) {
+	var totalHomes = "ACS_13_5YR_B11001_with_ann_HD02_VD01";
+	var marriedHome = "ACS_13_5YR_B11001_with_ann_HD01_VD03";
+	var singleMale = "ACS_13_5YR_B11001_with_ann_HD01_VD05";
+	var singleFemale = "ACS_13_5YR_B11001_with_ann_HD01_VD06";
+}
+
+	//find the percent of total households that fall under these categories
+	var avgHomes = [];
+	censusJson.features.forEach(function(feature) {
+
+		//find the total of homes that fall under these categories
+		var homes = (Number(feature.properties[marriedHome])) + (Number(feature.propertiesp[singleMale])) + (Number(feature.properties[singleFemale]));
+
+		//find the average number of homes in these categories
+		if(homes > 0) {
+			averageHomes.push(homes / Number(feature.properties[totalHomes]));
+		}
+	});
+
+	var scale = d3.scaleLinear().
+
+
 $(document).ready(function(){
 	// Makes the map
 	L.mapbox.accessToken = "pk.eyJ1IjoiZGJlZXRzIiwiYSI6ImNpdTRsdXIzNDBqcXkyb3BsaWZ5dDF1bWsifQ.fKKx1Q6B4vX4HadQnqDvGw";
